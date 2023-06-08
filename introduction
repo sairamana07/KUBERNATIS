@@ -1,13 +1,29 @@
 ARCHITECTURE OF K8S:
-C --> clustor
+C --> clustor (master and worknode)
 N --> node
 p --> pod
 C --> container
 A --> application
 
-to control/manage we use kubernatis. 
-
-
+MASTER NODE COMPONANTS:                                                                          
+             1. API server ( API server will take commands from user and exicute and give o/p to user, 
+                             and it used to communicate in cluster)     
+             2. etcd (it is like a data base to k8s)                                                                                           
+             3. controller manager
+                         1. cloud controll manager (if we are implementing k8s on could than its called as cc manager)
+                         2. kube controll manager ( if we are implementing on non cloud)
+             4. scheduler ( it schedules work for worker node/pod based on hardware properties of server)
+WORKER NODE COMPONANTS:
+             1. kubelete (  it going to be as agent it will inform to master, it is used to monitor to pods(stopped, deleted, or stopped))
+             2. kube proxy ( its like a network)
+             3. pods( group of containers)
+             4. container ( it is vm not having os in it)
+             
+ we cant setup k8s in many ways:
+             self managed kubernatis clusters are,                                 cloud managed kubernatis cluster are
+             1.minikube --> single node cluster                                    1. aws kubernatis clusters
+             2.kubeadm --> multi node cluster (manual way of creating cluster)     2. azure kubernatis cluster
+             3. kap --> multi node cluster (automation way of creating cluster)    3. google cloud cluster
 
 
 
