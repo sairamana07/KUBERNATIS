@@ -1,0 +1,45 @@
+ARCHITECTURE OF K8S:
+C --> clustor
+N --> node
+p --> pod
+C --> container
+A --> application
+
+to control/manage we use kubernatis. 
+
+
+
+
+
+POD: pod is a group of containers, it is a smallest unit of k8s which can deployable. inside we have containers, inside we have application.
+the prod can be created on two ways:
+1.Imperative     --> we create pods in this method by using commands 
+2. Declarative   --> we create pods in this by using MANIFEST file, and the manifest file is in form of YAML file.
+
+here now installing kubernatis by using script file , here we taking ubutu vm and it has many default directories we get while installing, so its
+better to create a new directory and install all the set up for k8s in that directory.
+
+mkdir project, in this we work with k8s now.
+vim minikube.sh
+          sudo apt update -y
+          sudo apt upgrade -y
+          sudo apt install curl wget apt-transport-https -y
+          sudo curl -fsSL https://get.docker.com -o get-docker.sh
+          sudo sh get-docker.sh
+          sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+          sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+          sudo chmod +x /usr/local/bin/minikube
+          sudo minikube version
+          sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          sudo curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+          sudo echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
+          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+          sudo minikube start --driver=docker --force
+     
+
+
+
+        
+              
+              
+
