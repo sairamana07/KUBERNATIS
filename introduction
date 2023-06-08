@@ -62,9 +62,20 @@ vim minikube.sh
           sudo minikube start --driver=docker --force
 now run thsi script as follows
          --> sh minikube.sh 
-     
+         ..............................................................................................
+now the kubernatis has been installed now we can create pods bu using imparative or declarative method,
+IMPERATIVE: creating pods by command line 
 
-
+        --> kubectl run pod1 --image=sairamana07/movies:latest
+        --> kubectl get pods --> to get list of pods 
+        --> kubectl get pod -o wide --> it will give additional information  of pods
+        --> kubectl describe pod pod1 --> it will give end to end info of pod.
+        --> kubectl delete pod pod1 --> to delete pod.
+        
+DECLARATIVE: in this we create pod by manifest file        
+             manifest file --> it is in yaml fele.
+             
+       --> vim pod1.yml
 
         
               
