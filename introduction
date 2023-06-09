@@ -163,12 +163,22 @@ EVENTS: actions having in kubernatis cluster
                                                 entire replicaset but not only the pod. 
 --> kubectl get pods  --> so now it will give now only the zomoto pods only bcz the reason is explained in above statement.
 
-            
 
-
-LIMITATIONS OF REPLICASET:
-
-
+LIMITATIONS OF REPLICA SET:
+    replica set will creates the copys of pods only.
+    replica sets will not work for rolling updates and rollbacks which means when we try to update replicaset version it not going to be work.
+    for this purpose we need to use DEPLOYMENT in kubernetis.
+    ( for example we have 3 pods and the version of that three pods will be same for all ex., v1, bcz they are the copys of pods only, and 
+      if we want to update the one pod version from v1 to v2 than that replicaset not going to work so this can be achieved by deployment.
+DEPLOYMENT:    
+       the DEPLOYMETN is an other function of kubernatis which will do whatever the replicaset is do and it can alos do whatever replicaset 
+       will not do and such are rollbacks and rolling updates etc.,
+       with deploymet we can achieve zero downtime 
+       with deployment we can update container image and configuration
+       in deployment we can update the version of application and we can track history of changes of application.
+       
+  
+    
 
 
 
