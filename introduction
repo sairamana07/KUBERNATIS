@@ -1,4 +1,5 @@
---> Kubernatis will not know about containers, it will know or it will deals with only pods, and pods is group of containers. 
+--> kubernatis is a container archistration tool. Kubernatis will not know about containers,it will know or it will deals with only pods, 
+    and pods is group of containers. 
 
 ARCHITECTURE OF K8S:
 C --> clustor (master and worknode)
@@ -104,6 +105,8 @@ REPLICA SETS:
                                                       replicate perticualar group of pods than the label will identify that group of pods by
                                                       the uniq name ex, 5 pods--> swiggy, 5pods--> zomato than if we want to replicate than 
                                                       directly we pickup swiggy pods by allocating the uniq name as label)
+                                                      the main purpose assinging label to a pod is to manage multiple pods at a single time
+                                                      with same labels.
                             app: swiggy      --> creating pod name
                             name: swiggy-rs   --> we can use rs or replicaset and rs is a shortcut for replicaset. and here we can give
                                                      any name that is our choise ex., abcd-rs
@@ -148,7 +151,23 @@ now to see the pods with labels by
                                        so by this example we can understand what exactly happen to how to use label while pod creation.
 --> kubectl get replicaset --> it will show the how many replicas we have and with replicaset name as well.
                               {if we create pod as normal it doesnt give replicas of pod but when when use rs method than we get replicas}
+--> kubectl api-resources --> is to describe full info kubernatis                               
 --> kubectl describe rs swiggy-rs --> it will give complete info swiggy rs replica set
+EVENTS: actions having in kubernatis cluster
+--> kubectl scale rs swiggy-rs --replicas=10  --> it scale the swiggy-rs label pods
+                                       ( and here only the swiggy labeled pods will be scalled but not the zomato pods bcz we have applied 
+                                         scale for only replica sets but not for normal pods)
+--> kubectl scale rs swiggy-rs --replicas=5  --> it scale down the replicasets 
+--> kubectl delete rs swiggy-rs       --> it will delete the replicaset of swiggy labled pods, but here the containers not going to be 
+                                                created after immediate delition like docker swarm or replicaset bcz here we are delting the 
+                                                entire replicaset but not only the pod. 
+--> kubectl get pods  --> so now it will give now only the zomoto pods only bcz the reason is explained in above statement.
+
+            
+
+
+LIMITATIONS OF REPLICASET:
+
 
 
 
