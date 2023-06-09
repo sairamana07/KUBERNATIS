@@ -1,3 +1,5 @@
+--> Kubernatis will not know about containers, it will know or it will deals with only pods, and pods is group of containers. 
+
 ARCHITECTURE OF K8S:
 C --> clustor (master and worknode)
 N --> node
@@ -40,6 +42,7 @@ POD: pod is a group of containers, it is a smallest unit of k8s which can deploy
 the prod can be created on two ways:
 1.Imperative     --> we create pods in this method by using commands 
 2. Declarative   --> we create pods in this by using MANIFEST file, and the manifest file is in form of YAML file.
+NOTE: It is always best to prefer DECLARATIVE method bcz in imparative it is not possible to define all the info and specifications of a pod
 
 here now installing kubernatis by using script file , here we taking ubutu vm and it has many default directories we get while installing, so its
 better to create a new directory and install all the set up for k8s in that directory.
@@ -71,11 +74,30 @@ IMPERATIVE: creating pods by command line
         --> kubectl get pod -o wide --> it will give additional information  of pods
         --> kubectl describe pod pod1 --> it will give end to end info of pod.
         --> kubectl delete pod pod1 --> to delete pod.
+        --> kubectl api-resources --> will give kubernatis information and help about commands.
         
-DECLARATIVE: in this we create pod by manifest file        
-             manifest file --> it is in yaml fele.
-             
-       --> vim pod1.yml
+DECLARATIVE: in this we create pod by manifest file, and this manifest file is in yaml format.        
+                
+        --> vim pod1.yml
+                    apiVersion: V1
+                    kind: pod
+                    metadata:
+                      name: pod1
+                    spec:
+                      containers:
+                      - name: cont1
+                      image: nginx
+         NOT YET TO  BE COMPLETED
+********************************************************************************************************************************************
+DAY02,09-06-23.
+ in generally when we got deleted the pod than the use not cannot able access the application like before, because in normal methods of pod 
+ creation we have not to creat a replications of a pod so to over come this we have REPLICA SETS pod creation method.
+
+REPLICA SETS: 
+            -> it will creates multiple copys or replicas of a pod, if we delete one pod than the replica set create another pod.
+            
+
+
 
         
               
