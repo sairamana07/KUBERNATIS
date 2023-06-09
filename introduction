@@ -159,7 +159,7 @@ EVENTS: actions having in kubernatis cluster
                                          scale for only replica sets but not for normal pods)
 --> kubectl scale rs swiggy-rs --replicas=5  --> it scale down the replicasets 
 --> kubectl delete rs swiggy-rs       --> it will delete the replicaset of swiggy labled pods, but here the containers not going to be 
-                                                created after immediate delition like docker swarm or replicaset bcz here we are delting the 
+                                                recreated after immediate delition like docker swarm or replicaset bcz here we are delting the 
                                                 entire replicaset but not only the pod. 
 --> kubectl get pods  --> so now it will give now only the zomoto pods only bcz the reason is explained in above statement.
 
@@ -177,8 +177,151 @@ DEPLOYMENT:
        with deployment we can update container image and configuration
        in deployment we can update the version of application and we can track history of changes of application.
        
+  normal pod will creates ----> pods only
+  replicaset will creates ---> pods  ( the replicaset will creates only the replicas only)  
+  deployment will creates ----> replicaset ----> pods ( the eployment will creates rs and it is able to update the apllication as well)
   
-    
+  creating deployment object:  just remove replicaset from rs manifest file and replace that with deployment.
+    --> vim abcd.yml
+                    
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: swiggy
+  name: swiggy-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+        - name: cont1
+          image: nginx
+--> kubectl create -f abcd.yml  --> creating object from manifestfile
+--> kubctl get deployment ---> it can show the creted deployment
+--> kubectl get rs --> now we can see the replicaset created by deployment object method 
+--> kubectl get pods --> we can see the pods which are created by deployment object
+               so by above process we can say that the deployment will create rs and pods 
+--> kubectl delete pods swiggy-deploy-64cd94d7f4-bnm52  --> first the mentioned pod will get deleted and immideatly the pod will be recreated
+                                                             this is called as zero downtime.
+ the main purpose of deployment is update the application, this means to change or update the papplication we need to change the image so, 
+ in abcd.yml manifest file change the image name as nginx to nginx:1.14(for example)
+ i.e,
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: swiggy
+  name: swiggy-deploy               --> deploy is the shortcut for deployment.
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+        - name: cont1
+          image: nginx:1.14
+--> kubectl apply -f abcd.yml
+ 
+ kubectl create vs kubectl apply:
+            --> kubectl crete is to create the object for the first time, kubectl apply means it apply the changes for alredy existing objects.
+                if use kubectl create after changing the image version than the existing version of pod will deleted first and a new version 
+                pod will created again.
+--> kubectl describe deploy --> now it gives update version of image of replicaset as nginx:1.14
+--> kubectl rollout status deployment/swiggy-deploy ---> its rollout the previous 
+                                                     actually the rollback to the previous version of deployment cant be done by two ways 
+                                                     1. go the manifest file and change to the previous version 
+                                                     2. --> kubectl edit deploy swiggy-deploy
+                                                             now in the opened file change the version than again run this file.
+  
+         
+ HISTORY:
+ 
+ 
+   1  mkdir abcd
+    2  cd abcd/
+    3  vim minikube.sh
+    4  sh minikube.sh
+    5  rm -rf *
+    6  vim abc.yml
+    7  kubectl create -f abc.yml
+    8  kubectl get po
+    9  kubectl delete po swiggy-rs-zqgqf
+   10  kubectl get po
+   11  kubectl delete pod swiggy-rs-z7667
+   12  kubectl get po
+   13  kubectl run zomato --image=nginx
+   14  kubectl run zomato1 --image=nginx
+   15  kubectl run zomato2 --image=nginx
+   16  kubectl get po
+   17  kubectl get po --show-labels
+   18  kubectl get replicaset
+   19  kubectl get rs
+   20  kubectl api-resources
+   21  kubectl get rs
+   22  kubectl desribe rs swiggy-rs
+   23  kubectl describe rs swiggy-rs
+   24  kubectl get rs
+   25  kubectl scale rs swiggy-rs --replicas=10
+   26  kubectl get rs
+   27  kubectl get po
+   28  kubectl scale rs swiggy-rs --replicas=5
+   29  kubectl get po
+   30  kubectl delete rs swiggy-rs
+   31  kubectl get po
+   32  kubectl delete pods -n default
+   33  kubectl delete all -n default
+   34  kubectl delete all -n=default
+   35  kubectl get po
+   36  kubectl delete pod zomato zomato1 zomato2
+   37  kubectl get po
+   38  vim abc.yml
+   39  kubectl create -f abc.yml
+   40  kubectl get deployment
+   41  kubectl get rs
+   42  kubectl get po
+   43  kubectl delete pod swiggy-deploy-64cd94d7f4-p9ztf
+   44  kubectl get po
+   45  kubectl describe deploy
+   46  vim abc.yml
+   47  kubectl create -f abc.yml
+   48  kubectl apply -f abc.yml
+   49  kubectl describe deploy
+   50  vim abc.yml
+   51  kubectl apply -f abc.yml
+   52  kubectl describe deploy
+   53  kubectl get po
+   54  kubectl rollout status deployment/swiggy-deploy
+   55  kubectl describe deploy
+   56  kubectl get deploy
+   57  kubectl get po
+   58  kubectl edit deploy swiggy-deploy
+   59  kubectl get deploy
+   60  kubectl get po
+   61  kubectl describe deploy
+   62  kubectl edit deploy swiggy-deploy
+   63  kubectl get po
+   64  kubectl edit deploy swiggy-deploy
+   65  kubectl get po
+   66  kubectl edit deploy swiggy-deploy
+   67  cat abc.yml
+   68  history
+*********************************************************************************************************************************************
+
+
+ 
+               
 
 
 
