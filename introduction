@@ -96,6 +96,69 @@ DAY02,09-06-23.
 REPLICA SETS: 
             -> it will creates multiple copys or replicas of a pod, if we delete one pod than the replica set create another pod.
             
+            --> vim abcd.yml
+                        apiVersion: apps/v1      --> here we are using apps/v1 is version for replicaset
+                        kind: ReplicaSet         --> the kind of object is ReplicaSet and here R&S must be capital
+                        metadata:
+                          labels:                 --> label is a uniq tag used to identify the pod(if we have multiple pods than we want to 
+                                                      replicate perticualar group of pods than the label will identify that group of pods by
+                                                      the uniq name ex, 5 pods--> swiggy, 5pods--> zomato than if we want to replicate than 
+                                                      directly we pickup swiggy pods by allocating the uniq name as label)
+                            app: swiggy      --> creating pod name
+                            name: swiggy-rs   --> we can use rs or replicaset and rs is a shortcut for replicaset. and here we can give
+                                                     any name that is our choise ex., abcd-rs
+                        spec:                    --> specification of replicaset
+                          replicas: 3
+                          selector:              --> this selector will select the group of pods by label
+                            matchLabels:
+                              app: swiggy-rs
+                        template:
+                          containers:
+                            - name: cont1
+                              image: nginx
+perfect indentain is,
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: swiggy
+  name: swiggy-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+        - name: cont1
+          image: nginx
+--> kubectl create -f abcd.yml --> creating resource file from file abcd.yml( creating pod from resource file abcd.yml)
+--> kubectl get pods           --> here we seen the three riplicas and in running state 
+--> kubectl delete pod podname --> to delete one pod from replica set and at the deleting pod immediatly another pod will be created bcs here 
+                                    we creating pod as replicaset method. and we are having swiggy as a label for these 3 pods.
+--> kubectl run zomato1 --image=nginx --> crating pod with other label by imperative method
+--> kubectl run zomato2 --image=nginx
+--> kubectl run zomato3 --image=nginx
+now to see the pods with labels by 
+--> kubectl get pods --show-labels --> here we can see the 3 pods with swiggy label and 3 pods with zomato label
+                                       so by this example we can understand what exactly happen to how to use label while pod creation.
+--> kubectl get replicaset --> it will show the how many replicas we have and with replicaset name as well.
+                              {if we create pod as normal it doesnt give replicas of pod but when when use rs method than we get replicas}
+--> kubectl describe rs swiggy-rs --> it will give complete info swiggy rs replica set
+
+
+
+
+                                    
+                                    
+
+                        
+                            
+                        
 
 
 
