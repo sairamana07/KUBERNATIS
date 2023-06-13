@@ -427,6 +427,16 @@ STEP4: CREATING CLUSTER BY KOPS:
   --> kops edit ig --name=saiamana.k8s.local master-us-east-1a  --> to edit the master information
                                          here ig --> instance group
   --> kops edit ig --name=sairamana.k8s.local nodes-us-east-1a --> to edit the nodes information
+  --> kops update cluster --name sairamana.k8s.local --yes --admin  --> wait 10 min than cluster will get updated with changes we made 
+                                                                        and we get multiple errors while updating but its doesnt effect.
+  --> kops validate cluster ---> we can see what happening while updating cluster
+  
+  WHILE UPDATING CLUSTER AT LAST WE WILL GET AS YOUR CLUSTER IS READY 
+  
+  
+  
+  
+  
   
                                        
 
