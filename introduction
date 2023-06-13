@@ -423,6 +423,14 @@ STEP4: CREATING CLUSTER BY KOPS:
   --> kops create cluster --name sairamana.k8s.local --zones us-east-1a --master-size t2.medium --node-size t2.micro
   ..........
   --> kops get cluster --> gives the clusters
+  --> kops edit cluster sairamana.k8s.local --> to edit cluster information
+  --> kops edit ig --name=saiamana.k8s.local master-us-east-1a  --> to edit the master information
+                                         here ig --> instance group
+  --> kops edit ig --name=sairamana.k8s.local nodes-us-east-1a --> to edit the nodes information
+  
+                                       
+
+
   
                    
                    
