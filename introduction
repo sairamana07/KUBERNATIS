@@ -363,6 +363,13 @@ STEP1:
     Default region name [None]: ap-south-1                                 --> giving region name 
     default output format: table                                           --> gibin default output format as table.
     
+    if we mistake giving the keys information above is wrong than we can edit them to correct by below process
+    --> cd .aws
+    --> ll --> config, credentials
+    --> vim config ---> give the correct configureations
+    --> vim credentials --> give correct credentials
+    
+    
     
 
      
