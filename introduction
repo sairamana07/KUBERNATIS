@@ -416,8 +416,14 @@ STEP3: CREATING BUCKETS
                 region = us-east-1
       ............................
    now whatever the information avaiblein kops cluster is needs to export into the bucket so,
-   --> export KOPS_STATE_STORE=s3://sairamana.k8s.local
+   -->  export KOPS_STATE_STORE=s3://sairamana.k8s.local
                    this means all the objects we created by kops such as cont,replicasets, pods .etc., are exportng into the bucket.
+                   
+STEP4: CREATING CLUSTER BY KOPS:
+  --> kops create cluster --name sairamana.k8s.local --zones us-east-1a --master-size t2.medium --node-size t2.micro
+  ..........
+  --> kops get cluster --> gives the clusters
+  
                    
                    
    
