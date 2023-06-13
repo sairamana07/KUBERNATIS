@@ -431,7 +431,16 @@ STEP4: CREATING CLUSTER BY KOPS:
                                                                         and we get multiple errors while updating but its doesnt effect.
   --> kops validate cluster ---> we can see what happening while updating cluster
   
-  WHILE UPDATING CLUSTER AT LAST WE WILL GET AS YOUR CLUSTER IS READY 
+  WHILE UPDATING CLUSTER AT LAST WE WILL GET AS YOUR CLUSTER IS READY i.e.,
+  NODE STATUS
+  NAME                    ROLE    READY
+  i-03c1f54074fd22e38     master  True
+  i-0ec6936beda3cf0cb     node    True
+
+  Your cluster sairamana.k8s.local is ready.
+  
+  
+
   
   
   
