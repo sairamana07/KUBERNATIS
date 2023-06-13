@@ -346,11 +346,14 @@ Amazon EKS , MINIKUBE, KUBEADM, RANCHER, TERRAFORM, HELM.
    work work with this third party application.
    
 CREATING USER AND GENERATING KEYS:
-lets search as user in aws search bar and than,
+lets search as user in aws search bar and than,                             (the IAM key is used to create ifra in aws cloud)
 
+iam--> user--> add users--> username(anything) --> next--> attach plicies directly--> 
+in permission policies
+administrationAccess--> next--> creater user
+in users click on user(which we have created user)--> security credentials--> create access key--> cli--> create access key
+now we have access key and secrete access key save these or download them as csv file at anywhere.
 
-
-IAM KEYS: Used to provide access for the kops to create infra.
 
 
                                     
