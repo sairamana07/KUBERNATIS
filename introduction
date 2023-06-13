@@ -341,6 +341,15 @@ ADVANTAGES:
 ALTERNATIVES:
 Amazon EKS , MINIKUBE, KUBEADM, RANCHER, TERRAFORM, HELM.
 
+** the Kops is an third party application which is used to automate the entire infrastructure. and inorder use this to automate cloud
+   infrastructure we need to create user and generate some keys for this user and have to assign these keys to aws cloud than only the aws will
+   work work with this third party application.
+   
+CREATING USER AND GENERATING KEYS:
+lets search as user in aws search bar and than,
+
+
+
 IAM KEYS: Used to provide access for the kops to create infra.
 
 
