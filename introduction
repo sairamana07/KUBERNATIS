@@ -406,11 +406,21 @@ STEP3: CREATING BUCKETS
       
    sometimes we accidentally able to delete the pods than our application wont be work so to overcome this we need to give the version to 
    the buckets as below command than we can retreive the deleted pods or information in bucket
+                                       or
+   in a container if we deleted one object so if we want retrieve that deleted object we need enable the version configureatin                   
+                                  
    --> aws s3api put-bucket-versioning --bucket sairamana.k8s.local --region us-east-1 --versioning-configuration Status=Enabled
       note: if we change the region while creating bucket than we need to change the region alos in aws config i.e, 
+      ............................
       --> vim .aws/config
                 region = us-east-1
-                
+      ............................
+   now whatever the information avaiblein kops cluster is needs to export into the bucket so,
+   --> export KOPS_STATE_STORE=s3://sairamana.k8s.local
+                   this means all the objects we created by kops such as cont,replicasets, pods .etc., are exportng into the bucket.
+                   
+                   
+   
     
    
       
