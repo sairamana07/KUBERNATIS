@@ -368,7 +368,36 @@ STEP1:
     --> ll --> config, credentials
     --> vim config ---> give the correct configureations
     --> vim credentials --> give correct credentials
+
+STEP2: DOWNLOADING KOPS AND KUBECTL
+    --> curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+                                                        above link is for downloading kubectl commandline tool
+    --> wget https://github.com/kubernetes/kops/releases/download/v1.24.1/kops-linux-amd64
+                                                         this link for downloading kops application
+    --> ll --> will give the above two download file but we need to do some exicutable operations by using above file so we need 
+                give the exicutable permission for above two files so,
+    --> chmod +x kops-linux-amd64 kubectl     ---> giving exicutable permissions two kop and kubctl
     
+    in linux all exicuitable files should be in bin directory only than only they are able to exicuitable so we need to move the above exicutable
+    files in to bin directory so,
+    
+    --> mv kubectl /usr/local/bin/kubectl  --> moving kubectl into bin
+    --> mv kops-linux-amd64 /usr/local/bin/kops  --> moving kops into the bin directory
+    
+     we have downloaded the third partly application files so we need to give the path from where these files need to exicute i.e, bin,
+    --> vim .bashrc 
+              export PATH$PATH:/usr/local/bin
+    --> source .bashrc   ---> to update this path changes in .bashrc          
+    
+    now we can exicute the commands from kubectl and kops to check this we can check the versions i.e,
+    --> kops version
+    --> kubectl version
+    
+           
+              
+               
+    
+
     
     
 
