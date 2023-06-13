@@ -357,6 +357,14 @@ now we have access key and secrete access key save these or download them as csv
 
 STEP1:
      to work with EC2 by using KOPS we need to provide the kops keys(permissions) which we have generated are to assign to ec2 instance.
+     aws configure                                                         --> configuring ec2 with created user(kops) accesskey.
+    AWS Access Key ID [None]: AKIA2NTY5YYPCLXAGLZD                         --> giving aws key
+    AWS Secret Access Key [None]: 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 --> giving secret key
+    Default region name [None]: ap-south-1                                 --> giving region name 
+    default output format: table                                           --> gibin default output format as table.
+    
+    
+
      
 
 
