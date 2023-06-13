@@ -386,7 +386,7 @@ STEP2: DOWNLOADING KOPS AND KUBECTL
     
      we have downloaded the third partly application files so we need to give the path from where these files need to exicute i.e, bin,
     --> vim .bashrc 
-              export PATH=$PATH:/usr/local/bin
+              export PATH=$PATH:/usr/local/bin/
     --> source .bashrc   ---> to update this path changes in .bashrc          
     
     now we can exicute the commands from kubectl and kops to check this we can check the versions i.e,
