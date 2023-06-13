@@ -439,6 +439,33 @@ STEP4: CREATING CLUSTER BY KOPS:
 
   Your cluster sairamana.k8s.local is ready.
   
+  --> kubectl get nodes --> gives default nodes which created 
+  
+  now we can create pods by deployment method using writing script as below
+  --> vim abcd.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: swiggy
+  name: swiggy-deploy                   ---> deploy is shortcut for deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+      - name: cont1
+        image: nginx:1.16
+   now we can create pods by run above script as,
+   --> kubectl create -f abcd.yml
+   
+  
   
 
   
