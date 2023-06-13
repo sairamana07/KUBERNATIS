@@ -318,11 +318,30 @@ spec:
    67  cat abc.yml
    68  history
 *********************************************************************************************************************************************
+12-06-23,day04.
+KOPS(KUBERNATES OPERATIONS): it is a application which automates everything
+
+kOps, also known as Kubernetes operations, is an open-source tool that helps you create, destroy, upgrade, 
+and maintain a highly available, production-grade Kubernetes cluster.
+Depending on the requirement, kOps can also provision cloud infrastructure.
+kOps is mostly used in deploying AWS and GCE Kubernetes clusters. But officially, the tool only supports AWS.
+Support for other cloud providers (such as DigitalOcean, GCP, and OpenStack) are in the beta stage.
 
 
- 
+ADVANTAGES:
+•	Automates the provisioning of AWS and GCE Kubernetes clusters
+•	Deploys highly available Kubernetes masters
+•	Supports rolling cluster updates
+•	Autocompletion of commands in the command line
+•	Generates Terraform and CloudFormation configurations
+•	Manages cluster add-ons.
+•	Supports state-sync model for dry-runs and automatic idempotency
+•	Creates instance groups to support heterogeneous clusters 
                
+ALTERNATIVES:
+Amazon EKS , MINIKUBE, KUBEADM, RANCHER, TERRAFORM, HELM.
 
+IAM KEYS: Used to provide access for the kops to create infra.
 
 
                                     
