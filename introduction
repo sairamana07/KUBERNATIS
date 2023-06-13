@@ -392,7 +392,31 @@ STEP2: DOWNLOADING KOPS AND KUBECTL
     now we can exicute the commands from kubectl and kops to check this we can check the versions i.e,
     --> kops version
     --> kubectl version
+
+STEP3: CREATING BUCKETS
+      all the clustor information is stored in buckets so we need to create the buckets
+    --> aws s3api create-bucket --bucket sairamana.k8s.local --region us-east-1   --> its creates bucket and sometimes it could not create bcz of
+                                                                                    unavailably of region so at that time we simply change the 
+                                                                                    region and create again than it will work.
+     --------------------------------------
+     |            CreateBucket            |
+        ----------+------------------------+
+      |  Location |  /sairamana.k8s.local  |
+      +-----------+------------------------+
+      
+   sometimes we accidentally able to delete the pods than our application wont be work so to overcome this we need to give the version to 
+   the buckets as below command than we can retreive the deleted pods or information in bucket
+   --> aws s3api put-bucket-versioning --bucket sairamana.k8s.local --region us-east-1 --versioning-configuration Status=Enabled
+      note: if we change the region while creating bucket than we need to change the region alos in aws config i.e, 
+      --> vim .aws/config
+                region = us-east-1
+                
     
+   
+      
+                                                                           
+                                                                                    
+
            
               
                
