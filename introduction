@@ -355,6 +355,11 @@ in users click on user(which we have created user)--> security credentials--> cr
 now we have access key and secrete access key save these or download them as csv file at anywhere.
 
 
+STEP1:
+     to work with EC2 by using KOPS we need to provide the kops keys(permissions) which we have generated are to assign to ec2 instance.
+     
+
+
 
                                     
                                     
