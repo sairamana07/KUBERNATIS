@@ -345,6 +345,8 @@ Amazon EKS , MINIKUBE, KUBEADM, RANCHER, TERRAFORM, HELM.
    infrastructure we need to create user and generate some keys for this user and have to assign these keys to aws cloud than only the aws will
    work work with this third party application.
    
+ ESTABLISHING KOPS IN MANUAL WAY:-
+ 
 CREATING USER AND GENERATING KEYS:
 lets search as user in aws search bar and than,                             (the IAM key is used to create ifra in aws cloud)
 
@@ -430,6 +432,8 @@ STEP4: CREATING CLUSTER BY KOPS:
   --> kops update cluster --name sairamana.k8s.local --yes --admin  --> wait 10 min than cluster will get updated with changes we made 
                                                                         and we get multiple errors while updating but its doesnt effect.
   --> kops validate cluster ---> we can see what happening while updating cluster
+      if we get (error:validation failed) while validating by above command then we need run belowcommand i.e.,
+      export KOPS_STATE-STORE=s3://sairamana.k8s.local  --> then we will get validation correctly.
   
   WHILE UPDATING CLUSTER AT LAST WE WILL GET AS YOUR CLUSTER IS READY i.e.,
   NODE STATUS
