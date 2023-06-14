@@ -433,7 +433,11 @@ STEP4: CREATING CLUSTER BY KOPS:
                                                                         and we get multiple errors while updating but its doesnt effect.
   --> kops validate cluster ---> we can see what happening while updating cluster
       if we get (error:validation failed) while validating by above command then we need run belowcommand i.e.,
-      export KOPS_STATE-STORE=s3://sairamana.k8s.local  --> then we will get validation correctly.
+      cat kops.sh
+                export KOPS_STATE-STORE=s3://sairamana.k8s.local -->copy this and run as below,
+    
+      export KOPS_STATE-STORE=s3://sairamana.k8s.local  -->   then we will get validation correctly.
+
   
   WHILE UPDATING CLUSTER AT LAST WE WILL GET AS YOUR CLUSTER IS READY i.e.,
   NODE STATUS
