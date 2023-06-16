@@ -535,7 +535,121 @@ spec:
    13-06-23,day04.
    
    KOPS CREATION IN AUTOMATION WAY( WRITING AS SCRIPT FILE):-
-   
+
+  -> vim install.sh
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            wget https://github.com/kubernetes/kops/releases/download/v1.24.1/kops-linux-amd64
+            chmod +x kops-linux-amd64 kubectl
+            mv kubectl /usr/local/bin/kubectl
+            mv kops-linux-amd64 /usr/local/bin/kops
+            aws s3api create-bucket --bucket sairamana.k8s.local --region us-east-1
+            aws s3api put-bucket-versioning --bucket sairamana.k8s.local --region us-east-1 --versioning-configuration Status=Enabled
+            export KOPS_STATE_STORE=s3://sairamana.k8s.local
+            kops create cluster --name sairamana.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --node-count=2 --node-size t2.micro
+            kops update cluster --name sairamana.k8s.local --yes --admin                            
+ -> sh install.sh
+     now all the above script will be exicutes
+
+ -> vim .bashrc
+             export PATH=$PATH://usr/local/bin/
+ -> source .bashrc         --> to update the above vim .bashrc changes
+                  now we have given the paths to kubectl and kops as bin so now only we can use kubectl and kops
+                  commands in our terminal. to check this first we can check the versions of kops and kubectl if the version will come than all 
+                  process is statbel and correct which means.
+  -> kubectl version
+  -> kops version
+
+              if we got error while seeing the cluster creating and updating by this command  "kops validate cluster --wait 10m" 
+              then we need too do this the below action i.e.,
+                       -> cat install.sh
+                               export KOPS_STATE_STORE=s3://sairamana.k8s.local    --> now do exicute this kops export command again same as below
+                                                                                       export KOPS_STATE_STORE=s3://sairamana.k8s.local
+                                                                    
+             then we can able to see the validation process of cluster creating by  --> kops validate cluster --wati 10m
+
+             after 5min the cluster creation process wil successfully completed and we will get message as 
+                              NODE STATUS
+                  NAME                    ROLE    READY
+                 i-04e788ef8776ec17f     node    True
+                 i-055d0df29b16fc9dd     master  True
+                 i-0a38b880071080a99     node    True
+                Your cluster sairamana.k8s.local is ready.
+            now we can see the cluster nodes and master, loadbalacer and autoscalling groups in cluter creation region on aws dashboard. and 
+            which all are created automatically.
+
+
+KOPS SERVICES:   a service which measn if we want to expose the application to the world we need some services
+    ........................................................................................................................................
+    1. cluster IP --> a ClusterIP service provides a stable ip address and dns name for pods with in a cluster only
+                      (which means the users they are outside of the cluster will not able to use the applicatin which present in this cluster, 
+                       which means the application will not able to expose the outside of cluster users)
+                      but why we use this clusterip service means to create database in cluster and the db should only accessible with in the 
+                      clustetr numbers but not outside world user so we use clusterip service in kops mainly for creting db.
+
+ --> kubectl get pods , kubectl get svc
+                it shows present we havent any pods and services. so now createt a pod and apply the cluster ip service to that pod.
+
+-------> vim pod1.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db
+  labels:
+    app: phonepay
+spec:
+  containers:
+    - name: cont1
+      image: rahamshaik/phonepaymovies:v1
+      ports:
+      - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  type: ClusterIP
+  selector:
+    app: phonepay
+  ports:
+    - port: 80             --> this is the image port
+      targetPort: 80       --> the target port is containerport
+now run the above yml file to create pod and service i.e,
+--> kubectl create -f pod1.yml
+now we can see the created pod and service by 
+--> kubectl get pods , kubectl get svc
+--> kubectl describe pod db    --> it gives the full info of db pod
+
+if want to see in which ip address the db pod is running than 
+--> kubectl get po -o wide 
+   NAME   READY   STATUS    RESTARTS   AGE     IP           NODE                  NOMINATED NODE   READINESS GATES
+   db     1/1     Running   0          6m32s   100.96.2.4   i-0a38b880071080a99   <none>           <none>
+   so now the db pod running on i-0a38b880071080a99  node 
+
+if we want to see the appliciation which running on db pod we need to change the security groups into alltraffic bcz whenever we create
+kubernates cluster that comes with defual security groups. so we need to remove the default security groups and give it as alltraffic.
+      inbound rules  ssh--> anywhere(ipv4)
+                     alltraffic---> anywhere(ipv4)                ** the all traffic port number is 65535
+      outbound rules also same as inboud rules
+
+--> now if we open this application which present in the db pod with NODE i-0a38b880071080a99 ip addrees and port number 80 we wont get 
+    our application in browser bcz the ClusterIp service will only work in the cluster only but not the outside of the cluster so 
+    to overcome this limitation we have another service in kops as NodePort service.
+
+
+
+
+
+                                
+
+
+                
+                             
+
+
+  
+
    
    
   
