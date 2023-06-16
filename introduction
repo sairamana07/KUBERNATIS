@@ -637,6 +637,115 @@ kubernates cluster that comes with defual security groups. so we need to remove 
     our application in browser bcz the ClusterIp service will only work in the cluster only but not the outside of the cluster so 
     to overcome this limitation we have another service in kops as NodePort service.
 
+***************************************************************************************************************************************************
+DAY08,16-06-23
+
+               RBACE(role base access controll), ROLE, SERVICE. ROLE BINDING, 
+               to ristrict the user in kubernatis cluster we use RBAC
+
+     the main purpose of using RBAC in kubernates is to give and restrict the authentification and authorization or access to use the k8s
+     resources sudh as pods, containers, namespaces, deloyments, repliction sources .etc.,
+     which means in development of an application there are many teams would work on developing an application such as dev, test, prod ..etc.,
+     so if we want to give them an access to work in that perticular environment only and other teams wont be accessible the resources then in 
+     this scenario the rbac comes to place.
+     in kubernates resource quotas are used to set limit for the namespaces. its nothing but setting limits for pods and other some k8s 
+     resources
+
+     authentification: which means who a person who can able to access
+     authorization: which means a person who can create 
+     name space: to isolate the workspace
+
+     in this concept we create namespaces and in each name space we create set of users and that users will only access the resources which are 
+     associated with that perticualr namesplace only  
+                           NS-1                  NS-2
+                           USER-1                USER-2
+
+     ROLE:                   a role is user/group with some set of permissions in a namespace and with this permissions 
+                             we can access k8s objects
+     CLUSTER ROLE:-          it is set of permission that allows user/group to access resources in a entire cluster.
+     ROLE BINDING:-          it is used to attach a role to user or group to namespace
+     CLUSTOR ROLE BINDING:-  it is used to attach a role to user or group in enite cluster
+     SERVICE ACCOUNT:-       it will provide the access for the resources and services
+                             all the roles and role binding cluster and cluster bindings are created in service account.
+
+
+    1.1 Create Namespace
+        --> kubectl create namespace sairamana
+        --> kubectl get ns   --> it list the namespaces 
+
+    1.2 Create Service account
+        Following is the way to create Service Account. I have assigned this Service Account into previously created sairamana namespace.
+         --> vim srvacnt.yml
+            apiVersion: v1
+            kind: ServiceAccount
+            metadata:
+              name: sairamana-serviceaccount
+              namespace: sairamana
+        --> kubectl create -f srvacnt.yml          --> now service account created for the sairamana namespace
+
+    1.3 Create Role
+        --> role.yml
+            apiVersion: rbac.authorization.k8s.io/v1
+            kind: Role
+            metadata:
+              namespace: sairamana
+              name: pod-reader
+            rules:
+              - apiGroups: [""]
+                resources: ["pods"]
+                verbs: ["get", "watch", "list"]
+
+               
+        
+ 
+
+
+   
+
+      
+     
+
+
+  
+    
+ 
+     
+     
+
+    
+  
+
+
+    
+    the name space is reside in only one single server so we can take minikube or cluster. here we are taking the minikube.
+
+    minikube installation: 
+    to make it clear first create one dir and work in dir so,
+    --> mkdir minikube
+    --> cd minikube
+      
+    --> vim minikubeinstall.sh
+                sudo apt update -y
+                sudo apt upgrade -y
+                sudo apt install curl wget apt-transport-https -y
+                sudo curl -fsSL https://get.docker.com -o get-docker.sh
+                sudo sh get-docker.sh
+                sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+                sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+                sudo chmod +x /usr/local/bin/minikube
+                sudo minikube version
+                sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+                sudo curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+                sudo echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
+                sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+                sudo minikube start --driver=docker --force
+    -->  sh minikubeinstall.sh
+         now minikube setup has been installed.
+
+          
+
+    
+
 
 
 
