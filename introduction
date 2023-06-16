@@ -637,6 +637,10 @@ kubernates cluster that comes with defual security groups. so we need to remove 
     our application in browser bcz the ClusterIp service will only work in the cluster only but not the outside of the cluster so 
     to overcome this limitation we have another service in kops as NodePort service.
 
+NodePort:-   it NodePort service provides a way to expose a service on a static port on each node in a cluster. This type of service
+         is accessible both with in the cluster and externally, using node ip address and NodePort. NodePort(30000, 32767)
+
+
 ***************************************************************************************************************************************************
 DAY08,16-06-23
 
