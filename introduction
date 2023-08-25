@@ -80,14 +80,19 @@ IMPERATIVE: creating pods by command line
 DECLARATIVE: in this we create pod by manifest file, and this manifest file is in yaml format.        
                 
         --> vim pod1.yml
-                    apiVersion: V1
-                    kind: pod
+                    apiVersion: v1
+                    kind: Pod
                     metadata:
                       name: pod1
                     spec:
                       containers:
-                      - name: cont1
-                      image: nginx
+                        - name: cont1
+                          image: nginx
+kubectl create -f pod1.yml -------> to create pod from manifest file
+kubectl get pods
+kubectl describe pod pod1
+kubectl delete pod pod1
+
          NOT YET TO  BE COMPLETED
 ********************************************************************************************************************************************
 DAY02,09-06-23.
@@ -121,7 +126,7 @@ REPLICA SETS:
                               image: nginx
 perfect indentain is,
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: ReplicaSet  ----> in replicaset R and S must be capital
 metadata:
   labels:
     app: swiggy
