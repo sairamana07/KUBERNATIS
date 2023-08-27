@@ -86,8 +86,8 @@ DECLARATIVE: in this we create pod by manifest file, and this manifest file is i
                       name: pod1
                     spec:
                       containers:
-                        - name: cont1
-                          image: nginx
+                      - name: cont1
+                        image: nginx
 kubectl create -f pod1.yml -------> to create pod from manifest file
 kubectl get pods
 kubectl describe pod pod1
@@ -122,8 +122,8 @@ REPLICA SETS:
                               app: swiggy-rs
                         template:
                           containers:
-                            - name: cont1
-                              image: nginx
+                          - name: cont1
+                            image: nginx
 perfect indentain is,
 apiVersion: apps/v1
 kind: ReplicaSet  ----> in replicaset R and S must be capital
@@ -142,8 +142,8 @@ spec:
         app: swiggy
     spec:
       containers:
-        - name: cont1
-          image: nginx
+      - name: cont1
+        image: nginx
 --> kubectl create -f abcd.yml --> creating resource file from file abcd.yml( creating pod from resource file abcd.yml)
 --> kubectl get pods           --> here we seen the three riplicas and in running state 
 --> kubectl delete pod podname --> to delete one pod from replica set and at the deleting pod immediatly another pod will be created bcs here 
