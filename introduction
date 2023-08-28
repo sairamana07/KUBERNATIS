@@ -556,7 +556,7 @@ spec:
      now all the above script will be exicutes
 
  -> vim .bashrc
-             export PATH=$PATH://usr/local/bin/
+             export PATH=$PATH:/usr/local/bin/
  -> source .bashrc         --> to update the above vim .bashrc changes
                   now we have given the paths to kubectl and kops as bin so now only we can use kubectl and kops
                   commands in our terminal. to check this first we can check the versions of kops and kubectl if the version will come than all 
